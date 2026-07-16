@@ -9,23 +9,13 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Bogale Siyum">
   
-  <!-- Security & PWA -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://fonts.googleapis.com https://fonts.gstatic.com https://upload.wikimedia.org; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com;">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https: data: blob:;">
   <link rel="manifest" href="data:application/json,{}">
   <title>Bogale Siyum · Cooperative Bank of Oromia</title>
 
-  <!-- QR Code Library -->
-  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js">
-  </script>
-  
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com">
-  </script>
-  
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
-  
-  <!-- Google Fonts -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -115,24 +105,24 @@
         0 0 0 1px rgba(255, 255, 255, 0.1) inset;
     }
 
-    /* Logo - borderless floating white mark */
+    /* Logo Container */
     .logo-float {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 150px;
+      width: 160px;
+      height: 42px;
       margin-bottom: 0.75rem;
     }
     .logo-float img {
       width: 100%;
-      height: auto;
+      height: 100%;
       object-fit: contain;
-      filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(200%) contrast(100%);
-      transition: filter 0.35s ease, transform 0.35s ease;
+      filter: brightness(0) invert(1);
+      transition: transform 0.35s ease;
     }
     .logo-float img:hover {
-      filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(220%) contrast(100%) drop-shadow(0 6px 14px rgba(255, 255, 255, 0.45));
-      transform: scale(1.03);
+      transform: scale(1.04);
     }
 
     /* Header with wave */
@@ -194,29 +184,17 @@
         0 2px 6px rgba(0, 0, 0, 0.04),
         inset 0 1px 0 rgba(255, 255, 255, 0.9);
       color: #009FE3;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1.15);
       cursor: pointer;
       flex-shrink: 0;
-      overflow: hidden;
-    }
-    .action-pill::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 30% 30%, rgba(0, 159, 227, 0.1) 0%, transparent 70%);
-      opacity: 0;
-      transition: opacity 0.3s;
     }
     .action-pill:hover {
       transform: translateY(-4px);
       background: #ffffff;
-      box-shadow: 
-        0 16px 32px rgba(0, 130, 210, 0.22),
-        0 4px 10px rgba(0, 0, 0, 0.06);
+      box-shadow: 0 16px 32px rgba(0, 130, 210, 0.22);
       color: #00608a;
     }
-    .action-pill:hover::after { opacity: 1; }
     .action-pill:active { transform: scale(0.9); }
 
     /* Section divider */
@@ -280,7 +258,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 13px;
+      font-size: 12px;
       box-shadow: 0 3px 12px rgba(0, 159, 227, 0.5);
       position: absolute;
       top: -3px;
@@ -298,10 +276,9 @@
     .contact-card:hover {
       background: #FAFDFF;
       border-left-color: #F7931E;
-      box-shadow: 0 5px 14px rgba(0, 80, 130, 0.05), 0 2px 6px rgba(0, 0, 0, 0.03);
+      box-shadow: 0 5px 14px rgba(0, 80, 130, 0.05);
       transform: translateX(4px) translateY(-1px);
     }
-    .contact-card-clickable { cursor: pointer; }
 
     /* Icon circle */
     .icon-circle {
@@ -347,14 +324,12 @@
       cursor: pointer;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .qr-clickable:hover { transform: scale(1.05); box-shadow: 0 8px 20px rgba(0, 130, 200, 0.12); }
-    .qr-clickable:active { transform: scale(0.95); }
+    .qr-clickable:hover { transform: scale(1.02); }
 
     #qrCodeContainer {
       border-radius: 0.9rem;
       background: white;
-      padding: 6px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+      padding: 4px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -364,86 +339,51 @@
       display: block;
       border-radius: 0.5rem;
     }
-
-    /* Dark mode */
-    @media (prefers-color-scheme: dark) {
-      body {
-        background: linear-gradient(160deg, #0077B5 0%, #006694 50%, #005580 100%);
-        background-attachment: fixed;
-      }
-      .premium-card { background: #FFFFFF; }
-      .contact-card { background: #FFFFFF; }
-      .action-pill { background: rgba(255, 255, 255, 0.9); color: #009FE3; }
-      .glass-panel { background: rgba(255, 255, 255, 0.82); }
-    }
-
-    /* Reduced motion */
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
-      }
-    }
   </style>
 </head>
 <body class="antialiased">
 
-  <!-- Floating particles -->
   <div class="particle"></div>
   <div class="particle"></div>
   <div class="particle"></div>
   <div class="particle"></div>
   <div class="particle"></div>
 
-  <!-- Toast container -->
   <div id="toastContainer" class="toast-container" aria-live="polite"></div>
 
-  <!-- Main card -->
-  <main class="relative z-10 w-full max-w-[430px] bg-white rounded-[2.6rem] premium-card overflow-hidden flex flex-col card-enter" role="main" aria-label="Digital Identity - Bogale Siyum">
+  <main class="relative z-10 w-full max-w-[430px] bg-white rounded-[2.6rem] premium-card overflow-hidden flex flex-col card-enter" role="main">
     
-    <!-- Header -->
     <header class="header-with-wave">
       <div class="absolute inset-0 opacity-[0.04] pointer-events-none" style="background-image: repeating-linear-gradient(45deg, #ffffff 0px, #ffffff 2px, transparent 2px, transparent 10px);"></div>
-      <div class="absolute -top-12 -left-12 w-36 h-36 rounded-full bg-white/8 blur-3xl"></div>
-      <div class="absolute top-20 -right-10 w-40 h-40 rounded-full blur-3xl" style="background: rgba(247,147,30,0.04);"></div>
 
-      <!-- Logo - using inline SVG fallback for safety -->
       <div class="logo-float relative z-10">
         <img 
-          src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Cooperative_Bank_of_Oromia.png" 
+          id="brandLogo"
+          src="logo.png" 
           alt="Cooperative Bank of Oromia" 
-          loading="eager" 
-          decoding="async"
-          onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='flex';"
-        >
-        <!-- Fallback SVG logo in case image fails to load -->
-        <div style="display:none; width:150px; height:40px; align-items:center; justify-content:center;">
-          <svg width="150" height="40" xmlns="http://www.w3.org/2000/svg">
-            <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" font-size="14" font-weight="bold" font-family="Inter, sans-serif">COOPBANK</text>
-          </svg>
+          loading="eager"
+        />
+        <div id="brandLogoFallback" style="display:none;" class="w-full h-full items-center justify-center font-bold text-white tracking-wider text-lg">
+          COOPBANK
         </div>
       </div>
 
-      <!-- Avatar -->
       <div class="relative z-10 mb-3">
         <div class="w-28 h-28 rounded-full avatar-ring overflow-hidden">
           <img 
+            id="avatarImage"
             src="haile-DU79oNHd.jpeg" 
             alt="Bogale Siyum" 
             class="w-full h-full object-cover" 
-            loading="eager" 
-            decoding="async" 
-            style="image-rendering:auto;-webkit-backface-visibility:hidden;backface-visibility:hidden;transform:translateZ(0);"
-            onerror="this.style.background='#009FE3'; this.style.display='flex'; this.style.alignItems='center'; this.style.justifyContent='center'; this.style.color='white'; this.style.fontSize='2rem'; this.style.fontWeight='bold'; this.alt='BS';"
-          >
+            loading="eager"
+          />
         </div>
-        <span class="absolute bottom-2.5 right-2.5 status-dot border-[3px] border-white rounded-full" aria-label="Online"></span>
-        <span class="verified-badge" title="Verified Account" aria-label="Verified Account">
+        <span class="absolute bottom-2.5 right-2.5 status-dot border-[3px] border-white rounded-full"></span>
+        <span class="verified-badge" title="Verified Account">
           <i class="fa-solid fa-check"></i>
         </span>
       </div>
 
-      <!-- Name & Title -->
       <h1 class="relative z-10 text-[1.65rem] font-extrabold text-white tracking-tight drop-shadow-md leading-tight">Bogale Siyum</h1>
       <div class="relative z-10 flex items-center justify-center gap-2 mt-1.5">
         <span class="bg-white/18 text-white text-xs font-semibold px-3 py-0.5 rounded-full backdrop-blur-sm tracking-wide">Director</span>
@@ -454,7 +394,6 @@
         <i class="fa-solid fa-building-columns text-[0.7rem] opacity-80"></i> Cooperative Bank of Oromia
       </p>
 
-      <!-- SVG Wave -->
       <div class="wave-container">
         <svg viewBox="0 0 500 100" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M0 55 C60 48 100 65 160 68 C210 70 250 58 300 55 C350 52 390 62 440 58 C470 55 490 52 500 52 L500 100 L0 100 Z" fill="#FFFFFF"/>
@@ -463,7 +402,6 @@
       </div>
     </header>
 
-    <!-- Floating Action Toolbar -->
     <div class="floating-toolbar" aria-label="Quick actions">
       <a href="https://wa.me/251913329703" target="_blank" rel="noopener noreferrer" class="action-pill" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
       <a href="https://t.me/Gifti2026" target="_blank" rel="noopener noreferrer" class="action-pill" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
@@ -472,12 +410,10 @@
       <button onclick="downloadVCard()" class="action-pill" aria-label="Save contact"><i class="fa-solid fa-cloud-arrow-down"></i></button>
     </div>
 
-    <!-- Divider -->
     <div class="section-divider my-1.5"><span class="divider-dot"></span></div>
 
-    <!-- Contact Cards -->
-    <section class="px-5 pt-1 pb-1 space-y-2.5 flex-1" aria-label="Contact information">
-      <a href="tel:+251913329703" class="contact-card contact-card-clickable p-3.5 rounded-2xl flex items-center justify-between">
+    <section class="px-5 pt-1 pb-1 space-y-2.5 flex-1">
+      <a href="tel:+251913329703" class="contact-card p-3.5 rounded-2xl flex items-center justify-between">
         <div class="flex items-center gap-3">
           <div class="icon-circle w-9 h-9 rounded-lg flex items-center justify-center"><i class="fa-solid fa-phone text-sm"></i></div>
           <div><span class="text-[9px] font-bold text-gray-400 uppercase tracking-wider">Mobile</span><p class="text-sm font-semibold text-gray-800">+251 91 332 9703</p></div>
@@ -485,7 +421,7 @@
         <span class="text-gray-400 p-1.5"><i class="fa-solid fa-phone-volume text-sm"></i></span>
       </a>
       
-      <a href="mailto:Bogsiyum@gmail.com" class="contact-card contact-card-clickable p-3.5 rounded-2xl flex items-center justify-between">
+      <a href="mailto:Bogsiyum@gmail.com" class="contact-card p-3.5 rounded-2xl flex items-center justify-between">
         <div class="flex items-center gap-3">
           <div class="icon-circle w-9 h-9 rounded-lg flex items-center justify-center"><i class="fa-solid fa-envelope text-sm"></i></div>
           <div class="truncate"><span class="text-[9px] font-bold text-gray-400 uppercase tracking-wider">Email</span><p class="text-sm font-semibold text-gray-800 truncate">Bogsiyum@gmail.com</p></div>
@@ -493,7 +429,7 @@
         <span class="text-gray-400 p-1.5"><i class="fa-solid fa-arrow-up-right-from-square text-sm"></i></span>
       </a>
       
-      <a href="https://coopbankoromia.com.et" target="_blank" rel="noopener noreferrer" class="contact-card contact-card-clickable p-3.5 rounded-2xl flex items-center justify-between">
+      <a href="https://coopbankoromia.com.et" target="_blank" rel="noopener noreferrer" class="contact-card p-3.5 rounded-2xl flex items-center justify-between">
         <div class="flex items-center gap-3">
           <div class="icon-circle w-9 h-9 rounded-lg flex items-center justify-center"><i class="fa-solid fa-globe text-sm"></i></div>
           <div><span class="text-[9px] font-bold text-gray-400 uppercase tracking-wider">Website</span><p class="text-sm font-semibold text-gray-800">coopbankoromia.com.et</p></div>
@@ -509,25 +445,21 @@
       </div>
     </section>
 
-    <!-- Divider -->
     <div class="section-divider my-2"><span class="divider-dot"></span></div>
 
-    <!-- QR Section -->
     <div class="px-5 pt-1 pb-2">
-      <div class="glass-panel p-3.5 rounded-2xl flex items-center gap-4 qr-clickable" onclick="openCurrentUrl()" title="Tap to open profile link" role="button" tabindex="0" aria-label="Tap to open profile link" onkeydown="if(event.key==='Enter')openCurrentUrl()">
-        <div id="qrCodeContainer" class="w-[72px] h-[72px] shadow-sm" aria-label="QR Code for digital profile"></div>
+      <div class="glass-panel p-3.5 rounded-2xl flex items-center gap-4 qr-clickable" onclick="openCurrentUrl()">
+        <div id="qrCodeContainer" class="w-[72px] h-[72px] shadow-sm"></div>
         <div>
           <p class="text-sm font-bold text-gray-800 flex items-center gap-1.5"><i class="fa-solid fa-qrcode text-[#009FE3]"></i> Digital Identity</p>
-          <p class="text-[11px] text-gray-500 mt-0.5">Scan or tap to open profile</p>
-          <p class="text-[10px] text-gray-400 mt-1 flex items-center gap-1"><i class="fa-solid fa-check-circle text-[#009FE3]"></i> Verified by CoopBank</p>
+          <p class="text-[11px] text-gray-500 mt-0.5">Scan or tap to open link</p>
+          <p class="text-[10px] text-gray-400 mt-1 flex items-center gap-1"><i class="fa-solid fa-circle-check text-[#009FE3]"></i> Verified by CoopBank</p>
         </div>
       </div>
     </div>
 
-    <!-- Divider -->
     <div class="section-divider my-2"><span class="divider-dot"></span></div>
 
-    <!-- Footer -->
     <footer class="px-5 pb-5 pt-1">
       <button onclick="downloadVCard()" class="w-full py-3 bg-[#009FE3] hover:bg-[#0089C4] text-white font-semibold rounded-2xl shadow-lg transition-all active:scale-[0.97] flex items-center justify-center gap-2 text-sm">
         <i class="fa-solid fa-address-card"></i> Save Contact
@@ -541,7 +473,17 @@
 
       var currentPageUrl = window.location.href;
 
-      // Generate real QR code
+      // Handle logo image fail safely
+      var img = document.getElementById('brandLogo');
+      if (img) {
+        img.onerror = function() {
+          img.style.display = 'none';
+          var fallback = document.getElementById('brandLogoFallback');
+          if (fallback) fallback.style.display = 'flex';
+        };
+      }
+
+      // Generate dynamic QR Code
       function generateRealQRCode() {
         var container = document.getElementById('qrCodeContainer');
         if (!container) return;
@@ -557,34 +499,25 @@
               colorLight: '#FFFFFF',
               correctLevel: QRCode.CorrectLevel.M
             });
-          } catch (error) {
+          } catch (e) {
             showFallbackQR();
           }
         } else {
-          setTimeout(function() {
-            if (typeof QRCode !== 'undefined') {
-              generateRealQRCode();
-            } else {
-              showFallbackQR();
-            }
-          }, 500);
+          showFallbackQR();
         }
       }
 
-      // Fallback QR display
       function showFallbackQR() {
         var container = document.getElementById('qrCodeContainer');
         if (!container) return;
-        container.innerHTML = '<div style="width:72px;height:72px;display:flex;align-items:center;justify-content:center;background:#009FE3;color:white;border-radius:0.5rem;font-size:8px;text-align:center;padding:4px;">TAP TO<br>OPEN<br>LINK</div>';
+        container.innerHTML = '<div style="width:72px;height:72px;display:flex;align-items:center;justify-content:center;background:#009FE3;color:white;border-radius:0.5rem;font-size:8px;text-align:center;padding:4px;font-weight:bold;">TAP TO<br>OPEN</div>';
       }
 
-      // Open current URL
       window.openCurrentUrl = function() {
         window.open(currentPageUrl, '_blank', 'noopener,noreferrer');
         showToast('Opening profile link...', 'info');
       };
 
-      // Toast notification
       function showToast(message, type) {
         type = type || 'success';
         var container = document.getElementById('toastContainer');
@@ -607,7 +540,6 @@
         }, 2400);
       }
 
-      // Copy text to clipboard
       window.copyText = function(text) {
         if (!navigator.clipboard) {
           var textarea = document.createElement('textarea');
@@ -628,7 +560,6 @@
         });
       };
 
-      // Share profile
       window.shareProfile = function() {
         var shareData = {
           title: 'Bogale Siyum - Director Hawassa District',
@@ -642,16 +573,13 @@
           }).catch(function(error) {
             if (error.name !== 'AbortError') {
               window.copyText(currentPageUrl);
-              showToast('Link copied to clipboard', 'info');
             }
           });
         } else {
           window.copyText(currentPageUrl);
-          showToast('Profile link copied to clipboard', 'info');
         }
       };
 
-      // Download vCard
       window.downloadVCard = function() {
         var vCard = 'BEGIN:VCARD\r\n' +
           'VERSION:3.0\r\n' +
@@ -659,22 +587,17 @@
           'N:Siyum;Bogale;;;\r\n' +
           'ORG:Cooperative Bank of Oromia\r\n' +
           'TITLE:Director Hawassa District\r\n' +
-          'ROLE:Director\r\n' +
-          'TEL;TYPE=WORK,VOICE:+251913329703\r\n' +
+          'TEL;TYPE=CELL,VOICE:+251913329703\r\n' +
           'EMAIL;TYPE=INTERNET:Bogsiyum@gmail.com\r\n' +
           'URL:' + currentPageUrl + '\r\n' +
           'ADR;TYPE=WORK:;;Hawassa District Headquarters;Hawassa;;;Ethiopia\r\n' +
-          'X-SOCIALPROFILE;TYPE=LinkedIn:https://www.linkedin.com/in/bogale-siyum-6b6079302\r\n' +
-          'X-SOCIALPROFILE;TYPE=Telegram:https://t.me/Gifti2026\r\n' +
-          'X-SOCIALPROFILE;TYPE=WhatsApp:https://wa.me/251913329703\r\n' +
-          'NOTE:Digital Identity - Cooperative Bank of Oromia\r\n' +
           'END:VCARD';
         
-        var blob = new Blob([vCard], { type: 'text/vcard;charset=utf-8;' });
+        var blob = new Blob(['\ufeff' + vCard], { type: 'text/vcard;charset=utf-8;' });
         var url = URL.createObjectURL(blob);
         var link = document.createElement('a');
         link.href = url;
-        link.download = 'Bogale_Siyum_CoopBank.vcf';
+        link.download = 'Bogale_Siyum.vcf';
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -682,7 +605,6 @@
         showToast('Contact Saved Successfully', 'success');
       };
 
-      // Initialize
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', function() {
           setTimeout(generateRealQRCode, 300);
