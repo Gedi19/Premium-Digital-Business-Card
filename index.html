@@ -9,15 +9,23 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Bogale Siyum">
   <link rel="manifest" href="data:application/json,{}">
-  <title>Bogale Siyum · Identity · Cooperative Bank of Oromia</title>
+  <title>Bogale Siyum · Cooperative Bank of Oromia</title>
 
+  <!-- QR Code Library -->
   <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js">
   </script>
   
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com">
   </script>
+  
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -27,17 +35,13 @@
       --white: #FFFFFF;
       --charcoal: #1F2937;
       --light-gray: #F8FAFD;
-      --card-bg: #FFFFFF;
-      --glass-bg: rgba(255, 255, 255, 0.82);
-      --glass-border: rgba(255, 255, 255, 0.65);
-      --shadow-xs: 0 1px 2px rgba(0,0,0,0.02);
-      --shadow-sm: 0 2px 5px rgba(0,80,130,0.03), 0 1px 2px rgba(0,0,0,0.02);
-      --shadow-md: 0 5px 14px rgba(0,80,130,0.05), 0 2px 6px rgba(0,0,0,0.03);
-      --shadow-lg: 0 10px 24px rgba(0,80,130,0.07), 0 4px 10px rgba(0,0,0,0.04);
-      --shadow-xl: 0 18px 40px rgba(0,80,130,0.1), 0 8px 20px rgba(0,0,0,0.05);
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     body {
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
@@ -54,6 +58,7 @@
       -moz-osx-font-smoothing: grayscale;
     }
 
+    /* Ambient background glow */
     body::before {
       content: "";
       position: fixed;
@@ -67,19 +72,19 @@
       z-index: 0;
     }
 
+    /* Floating particles */
     .particle {
       position: fixed;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.4);
       pointer-events: none;
       z-index: 0;
       animation: floatParticle 15s infinite ease-in-out;
     }
     .particle:nth-child(1) { width: 120px; height: 120px; top: 5%; left: 3%; background: rgba(255, 255, 255, 0.5); }
-    .particle:nth-child(2) { animation-duration: 19s; animation-delay: -5s; width: 70px; height: 70px; top: 15%; right: 5%; background: rgba(255, 255, 255, 0.4); }
-    .particle:nth-child(3) { animation-duration: 17s; animation-delay: -9s; width: 55px; height: 55px; bottom: 18%; left: 6%; background: rgba(51, 181, 232, 0.45); }
-    .particle:nth-child(4) { animation-duration: 21s; animation-delay: -3s; width: 80px; height: 80px; top: 50%; right: 8%; background: rgba(255, 255, 255, 0.38); }
-    .particle:nth-child(5) { animation-duration: 23s; animation-delay: -7s; width: 45px; height: 45px; bottom: 30%; left: 15%; background: rgba(0, 168, 238, 0.5); }
+    .particle:nth-child(2) { width: 70px; height: 70px; top: 15%; right: 5%; background: rgba(255, 255, 255, 0.4); animation-duration: 19s; animation-delay: -5s; }
+    .particle:nth-child(3) { width: 55px; height: 55px; bottom: 18%; left: 6%; background: rgba(51, 181, 232, 0.45); animation-duration: 17s; animation-delay: -9s; }
+    .particle:nth-child(4) { width: 80px; height: 80px; top: 50%; right: 8%; background: rgba(255, 255, 255, 0.38); animation-duration: 21s; animation-delay: -3s; }
+    .particle:nth-child(5) { width: 45px; height: 45px; bottom: 30%; left: 15%; background: rgba(0, 168, 238, 0.5); animation-duration: 23s; animation-delay: -7s; }
 
     @keyframes floatParticle {
       0%, 100% { transform: translateY(0px) translateX(0px) scale(1); opacity: 0.4; }
@@ -88,6 +93,7 @@
       75% { transform: translateY(-40px) translateX(10px) scale(1.05); opacity: 0.65; }
     }
 
+    /* Card entrance animation */
     .card-enter {
       animation: cardRise 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
       opacity: 0;
@@ -97,16 +103,16 @@
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
+    /* Premium card */
     .premium-card {
       background: #FFFFFF;
       box-shadow: 
         0 30px 60px rgba(0, 0, 0, 0.15),
         0 12px 24px rgba(0, 0, 0, 0.08),
-        0 0 0 1px rgba(255,255,255,0.1) inset;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+        0 0 0 1px rgba(255, 255, 255, 0.1) inset;
     }
 
-    /* ---- LOGO ---- */
+    /* Logo - borderless floating white mark */
     .logo-float {
       display: flex;
       align-items: center;
@@ -122,11 +128,11 @@
       transition: filter 0.35s ease, transform 0.35s ease;
     }
     .logo-float img:hover {
-      filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(220%) contrast(100%) drop-shadow(0 6px 14px rgba(255,255,255,0.45));
+      filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(220%) contrast(100%) drop-shadow(0 6px 14px rgba(255, 255, 255, 0.45));
       transform: scale(1.03);
     }
 
-    /* ---- HEADER ---- */
+    /* Header with wave */
     .header-with-wave {
       position: relative;
       padding: 1.5rem 1.5rem 4rem 1.5rem;
@@ -138,6 +144,7 @@
       background: linear-gradient(180deg, #009FE3 0%, #0088CC 40%, #0077B5 100%);
     }
 
+    /* Wave container */
     .wave-container {
       position: absolute;
       bottom: -2px;
@@ -153,7 +160,7 @@
       display: block;
     }
 
-    /* ---- FLOATING ACTION TOOLBAR ---- */
+    /* Floating action toolbar */
     .floating-toolbar {
       display: flex;
       justify-content: center;
@@ -166,6 +173,7 @@
       width: 100%;
     }
 
+    /* Action pill buttons */
     .action-pill {
       width: 2.6rem;
       height: 2.6rem;
@@ -177,24 +185,23 @@
       background: rgba(255, 255, 255, 0.94);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255,255,255,0.7);
+      border: 1px solid rgba(255, 255, 255, 0.7);
       box-shadow: 
-        0 8px 22px rgba(0,100,150,0.1),
-        0 2px 6px rgba(0,0,0,0.04),
-        inset 0 1px 0 rgba(255,255,255,0.9);
+        0 8px 22px rgba(0, 100, 150, 0.1),
+        0 2px 6px rgba(0, 0, 0, 0.04),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
       color: #009FE3;
       font-size: 0.9rem;
       transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1.15);
-      position: relative;
-      overflow: hidden;
       cursor: pointer;
       flex-shrink: 0;
+      overflow: hidden;
     }
     .action-pill::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 30% 30%, rgba(0,159,227,0.1) 0%, transparent 70%);
+      background: radial-gradient(circle at 30% 30%, rgba(0, 159, 227, 0.1) 0%, transparent 70%);
       opacity: 0;
       transition: opacity 0.3s;
     }
@@ -202,14 +209,14 @@
       transform: translateY(-4px);
       background: #ffffff;
       box-shadow: 
-        0 16px 32px rgba(0,130,210,0.22),
-        0 4px 10px rgba(0,0,0,0.06);
+        0 16px 32px rgba(0, 130, 210, 0.22),
+        0 4px 10px rgba(0, 0, 0, 0.06);
       color: #00608a;
     }
     .action-pill:hover::after { opacity: 1; }
     .action-pill:active { transform: scale(0.9); }
 
-    /* ---- section divider ---- */
+    /* Section divider */
     .section-divider {
       display: flex;
       align-items: center;
@@ -221,9 +228,9 @@
       content: '';
       flex: 1;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(0,159,227,0.15), transparent);
+      background: linear-gradient(90deg, transparent, rgba(0, 159, 227, 0.15), transparent);
     }
-    .section-divider .divider-dot {
+    .divider-dot {
       width: 5px;
       height: 5px;
       border-radius: 50%;
@@ -232,6 +239,7 @@
       flex-shrink: 0;
     }
 
+    /* Glass panel */
     .glass-panel {
       background: rgba(255, 255, 255, 0.82);
       backdrop-filter: blur(16px);
@@ -239,18 +247,18 @@
       border: 1px solid rgba(255, 255, 255, 0.6);
     }
 
-    /* Larger avatar: 112px (w-28 h-28) */
+    /* Avatar ring */
     .avatar-ring {
-      box-shadow: 0 0 0 6px white, 0 0 0 10px rgba(0,159,227,0.1), 0 22px 44px rgba(0,0,0,0.14);
+      box-shadow: 0 0 0 6px white, 0 0 0 10px rgba(0, 159, 227, 0.1), 0 22px 44px rgba(0, 0, 0, 0.14);
       transition: transform 0.35s ease;
     }
     .avatar-ring:hover { transform: scale(1.04); }
 
+    /* Status dot */
     .status-dot {
       background: #10B981;
       width: 14px;
       height: 14px;
-      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
       animation: pulseGreen 2s infinite;
     }
     @keyframes pulseGreen {
@@ -259,6 +267,7 @@
       100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
     }
 
+    /* Verified badge */
     .verified-badge {
       background: #009FE3;
       color: white;
@@ -276,26 +285,29 @@
       border: 3px solid white;
     }
 
+    /* Contact cards */
     .contact-card {
       background: #FFFFFF;
       border-left: 4px solid #009FE3;
-      box-shadow: var(--shadow-xs);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
       transition: all 0.32s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
     .contact-card:hover {
       background: #FAFDFF;
       border-left-color: #F7931E;
-      box-shadow: var(--shadow-md);
+      box-shadow: 0 5px 14px rgba(0, 80, 130, 0.05), 0 2px 6px rgba(0, 0, 0, 0.03);
       transform: translateX(4px) translateY(-1px);
     }
     .contact-card-clickable { cursor: pointer; }
 
+    /* Icon circle */
     .icon-circle {
       background: #E8F4FD;
       color: #009FE3;
-      box-shadow: 0 2px 6px rgba(0,140,200,0.1);
+      box-shadow: 0 2px 6px rgba(0, 140, 200, 0.1);
     }
 
+    /* Toast notifications */
     .toast-container {
       position: fixed;
       top: 1.2rem;
@@ -312,14 +324,14 @@
       color: white;
       padding: 0.7rem 1.2rem;
       border-radius: 1rem;
-      box-shadow: 0 18px 36px rgba(0,0,0,0.2);
+      box-shadow: 0 18px 36px rgba(0, 0, 0, 0.2);
       font-weight: 500;
       font-size: 0.85rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
       animation: slideToast 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-      border: 1px solid rgba(255,255,255,0.1);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       pointer-events: auto;
     }
     @keyframes slideToast {
@@ -327,6 +339,7 @@
       to { transform: translateX(0); opacity: 1; }
     }
 
+    /* QR section */
     .qr-clickable {
       cursor: pointer;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -338,34 +351,54 @@
       border-radius: 0.9rem;
       background: white;
       padding: 6px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
       display: flex;
       align-items: center;
       justify-content: center;
     }
     #qrCodeContainer img,
-    #qrCodeContainer canvas { display: block; border-radius: 0.5rem; }
+    #qrCodeContainer canvas {
+      display: block;
+      border-radius: 0.5rem;
+    }
 
+    /* Dark mode */
     @media (prefers-color-scheme: dark) {
-      body { background: linear-gradient(160deg, #0077B5 0%, #006694 50%, #005580 100%); background-attachment: fixed; }
+      body {
+        background: linear-gradient(160deg, #0077B5 0%, #006694 50%, #005580 100%);
+        background-attachment: fixed;
+      }
       .premium-card { background: #FFFFFF; }
       .contact-card { background: #FFFFFF; }
-      .action-pill { background: rgba(255,255,255,0.9); color: #009FE3; }
-      .glass-panel { background: rgba(255,255,255,0.82); }
+      .action-pill { background: rgba(255, 255, 255, 0.9); color: #009FE3; }
+      .glass-panel { background: rgba(255, 255, 255, 0.82); }
     }
+
+    /* Reduced motion */
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
     }
   </style>
 </head>
 <body class="antialiased">
 
-  <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
+  <!-- Floating particles -->
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+
+  <!-- Toast container -->
   <div id="toastContainer" class="toast-container" aria-live="polite"></div>
 
+  <!-- Main card -->
   <main class="relative z-10 w-full max-w-[430px] bg-white rounded-[2.6rem] premium-card overflow-hidden flex flex-col card-enter" role="main" aria-label="Digital Identity - Bogale Siyum">
     
-    <!-- ========== HEADER ========== -->
+    <!-- Header -->
     <header class="header-with-wave">
       <div class="absolute inset-0 opacity-[0.04] pointer-events-none" style="background-image: repeating-linear-gradient(45deg, #ffffff 0px, #ffffff 2px, transparent 2px, transparent 10px);"></div>
       <div class="absolute -top-12 -left-12 w-36 h-36 rounded-full bg-white/8 blur-3xl"></div>
@@ -376,18 +409,28 @@
         <img 
           src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Cooperative_Bank_of_Oromia.png" 
           alt="Cooperative Bank of Oromia" 
-          loading="eager" decoding="async"
+          loading="eager" 
+          decoding="async"
           onerror="this.onerror=null; this.style.filter='none'; this.style.color='white'; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22160%22 height=%2240%22%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 fill=%22white%22 font-size=%2214%22 font-weight=%22bold%22 font-family=%22Inter,sans-serif%22%3ECOOPBANK%3C/text%3E%3C/svg%3E';"
         />
       </div>
 
-      <!-- Avatar: increased from w-24 h-24 to w-28 h-28 -->
+      <!-- Avatar -->
       <div class="relative z-10 mb-3">
         <div class="w-28 h-28 rounded-full avatar-ring overflow-hidden">
-          <img src="haile-DU79oNHd.jpeg" alt="Bogale Siyum" class="w-full h-full object-cover" loading="eager" decoding="async" style="image-rendering:auto;-webkit-backface-visibility:hidden;backface-visibility:hidden;transform:translateZ(0);">
+          <img 
+            src="haile-DU79oNHd.jpeg" 
+            alt="Bogale Siyum" 
+            class="w-full h-full object-cover" 
+            loading="eager" 
+            decoding="async" 
+            style="image-rendering:auto;-webkit-backface-visibility:hidden;backface-visibility:hidden;transform:translateZ(0);"
+          >
         </div>
         <span class="absolute bottom-2.5 right-2.5 status-dot border-[3px] border-white rounded-full" aria-label="Online"></span>
-        <span class="verified-badge" title="Verified Account" aria-label="Verified Account"><i class="fa-solid fa-check"></i></span>
+        <span class="verified-badge" title="Verified Account" aria-label="Verified Account">
+          <i class="fa-solid fa-check"></i>
+        </span>
       </div>
 
       <!-- Name & Title -->
@@ -401,7 +444,7 @@
         <i class="fa-solid fa-building-columns text-[0.7rem] opacity-80"></i> Cooperative Bank of Oromia
       </p>
 
-      <!-- Enhanced SVG Wave -->
+      <!-- SVG Wave -->
       <div class="wave-container">
         <svg viewBox="0 0 500 100" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M0 55 C60 48 100 65 160 68 C210 70 250 58 300 55 C350 52 390 62 440 58 C470 55 490 52 500 52 L500 100 L0 100 Z" fill="#FFFFFF"/>
@@ -410,43 +453,59 @@
       </div>
     </header>
 
-    <!-- ========== FLOATING ACTION TOOLBAR ========== -->
+    <!-- Floating Action Toolbar -->
     <div class="floating-toolbar" aria-label="Quick actions">
-      <a href="https://wa.me/251913329703" target="_blank" class="action-pill" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-      <a href="https://t.me/Gifti2026" target="_blank" class="action-pill" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
-      <a href="https://linkedin.com/in/bogale-siyum-6b6079302" target="_blank" class="action-pill" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+      <a href="https://wa.me/251913329703" target="_blank" rel="noopener" class="action-pill" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+      <a href="https://t.me/Gifti2026" target="_blank" rel="noopener" class="action-pill" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+      <a href="https://linkedin.com/in/bogale-siyum-6b6079302" target="_blank" rel="noopener" class="action-pill" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
       <button onclick="shareProfile()" class="action-pill" aria-label="Share profile"><i class="fa-solid fa-share-nodes"></i></button>
       <button onclick="downloadVCard()" class="action-pill" aria-label="Save contact"><i class="fa-solid fa-cloud-arrow-down"></i></button>
     </div>
 
-    <!-- Elegant divider -->
+    <!-- Divider -->
     <div class="section-divider my-1.5"><span class="divider-dot"></span></div>
 
     <!-- Contact Cards -->
-    <section class="px-5 pt-1 pb-1 space-y-2.5 flex-1">
+    <section class="px-5 pt-1 pb-1 space-y-2.5 flex-1" aria-label="Contact information">
       <a href="tel:+251913329703" class="contact-card contact-card-clickable p-3.5 rounded-2xl flex items-center justify-between">
-        <div class="flex items-center gap-3"><div class="icon-circle w-9 h-9 rounded-lg flex items-center justify-center"><i class="fa-solid fa-phone text-sm"></i></div><div><span class="text-[9px] font-bold text-gray-400 uppercase tracking-wider">Mobile</span><p class="text-sm font-semibold text-gray-800">+251 91 332 9703</p></div></div>
+        <div class="flex items-center gap-3">
+          <div class="icon-circle w-9 h-9 rounded-lg flex items-center justify-center"><i class="fa-solid fa-phone text-sm"></i></div>
+          <div><span class="text-[9px] font-bold text-gray-400 uppercase tracking-wider">Mobile</span><p class="text-sm font-semibold text-gray-800">+251 91 332 9703</p></div>
+        </div>
         <span class="text-gray-400 p-1.5"><i class="fa-solid fa-phone-volume text-sm"></i></span>
       </a>
+      
       <a href="mailto:Bogsiyum@gmail.com" class="contact-card contact-card-clickable p-3.5 rounded-2xl flex items-center justify-between">
-        <div class="flex items-center gap-3"><div class="icon-circle w-9 h-9 rounded-lg flex items-center justify-center"><i class="fa-solid fa-envelope text-sm"></i></div><div class="truncate"><span class="text-[9px] font-bold text-gray-400 uppercase tracking-wider">Email</span><p class="text-sm font-semibold text-gray-800 truncate">Bogsiyum@gmail.com</p></div></div>
+        <div class="flex items-center gap-3">
+          <div class="icon-circle w-9 h-9 rounded-lg flex items-center justify-center"><i class="fa-solid fa-envelope text-sm"></i></div>
+          <div class="truncate"><span class="text-[9px] font-bold text-gray-400 uppercase tracking-wider">Email</span><p class="text-sm font-semibold text-gray-800 truncate">Bogsiyum@gmail.com</p></div>
+        </div>
         <span class="text-gray-400 p-1.5"><i class="fa-solid fa-arrow-up-right-from-square text-sm"></i></span>
       </a>
-      <a href="https://coopbankoromia.com.et" target="_blank" class="contact-card contact-card-clickable p-3.5 rounded-2xl flex items-center justify-between">
-        <div class="flex items-center gap-3"><div class="icon-circle w-9 h-9 rounded-lg flex items-center justify-center"><i class="fa-solid fa-globe text-sm"></i></div><div><span class="text-[9px] font-bold text-gray-400 uppercase tracking-wider">Website</span><p class="text-sm font-semibold text-gray-800">coopbankoromia.com.et</p></div></div>
+      
+      <a href="https://coopbankoromia.com.et" target="_blank" rel="noopener" class="contact-card contact-card-clickable p-3.5 rounded-2xl flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="icon-circle w-9 h-9 rounded-lg flex items-center justify-center"><i class="fa-solid fa-globe text-sm"></i></div>
+          <div><span class="text-[9px] font-bold text-gray-400 uppercase tracking-wider">Website</span><p class="text-sm font-semibold text-gray-800">coopbankoromia.com.et</p></div>
+        </div>
         <span class="text-gray-400 p-1.5"><i class="fa-solid fa-arrow-up-right-from-square text-sm"></i></span>
       </a>
+      
       <div class="contact-card p-3.5 rounded-2xl flex items-center justify-between">
-        <div class="flex items-center gap-3"><div class="icon-circle w-9 h-9 rounded-lg flex items-center justify-center"><i class="fa-solid fa-building text-sm"></i></div><div><span class="text-[9px] font-bold text-gray-400 uppercase tracking-wider">Company</span><p class="text-sm font-semibold text-gray-800">Cooperative Bank of Oromia</p></div></div>
+        <div class="flex items-center gap-3">
+          <div class="icon-circle w-9 h-9 rounded-lg flex items-center justify-center"><i class="fa-solid fa-building text-sm"></i></div>
+          <div><span class="text-[9px] font-bold text-gray-400 uppercase tracking-wider">Company</span><p class="text-sm font-semibold text-gray-800">Cooperative Bank of Oromia</p></div>
+        </div>
       </div>
     </section>
 
+    <!-- Divider -->
     <div class="section-divider my-2"><span class="divider-dot"></span></div>
 
     <!-- QR Section -->
     <div class="px-5 pt-1 pb-2">
       <div class="glass-panel p-3.5 rounded-2xl flex items-center gap-4 qr-clickable" onclick="openCurrentUrl()" title="Tap to open profile link" role="button" tabindex="0" aria-label="Tap to open profile link" onkeydown="if(event.key==='Enter')openCurrentUrl()">
-        <div id="qrCodeContainer" class="w-18 h-18 shadow-sm" aria-label="QR Code for digital profile"></div>
+        <div id="qrCodeContainer" class="w-[72px] h-[72px] shadow-sm" aria-label="QR Code for digital profile"></div>
         <div>
           <p class="text-sm font-bold text-gray-800 flex items-center gap-1.5"><i class="fa-solid fa-qrcode text-[#009FE3]"></i> Digital Identity</p>
           <p class="text-[11px] text-gray-500 mt-0.5">Scan or tap to open profile</p>
@@ -455,8 +514,10 @@
       </div>
     </div>
 
+    <!-- Divider -->
     <div class="section-divider my-2"><span class="divider-dot"></span></div>
 
+    <!-- Footer -->
     <footer class="px-5 pb-5 pt-1">
       <button onclick="downloadVCard()" class="w-full py-3 bg-[#009FE3] hover:bg-[#0089C4] text-white font-semibold rounded-2xl shadow-lg transition-all active:scale-[0.97] flex items-center justify-center gap-2 text-sm">
         <i class="fa-solid fa-address-card"></i> Save Contact
@@ -467,42 +528,158 @@
   <script>
     (function() {
       'use strict';
+
       const currentPageUrl = window.location.href;
+
+      // Generate real QR code
       function generateRealQRCode() {
         const container = document.getElementById('qrCodeContainer');
         if (!container) return;
         container.innerHTML = '';
+        
         if (typeof QRCode !== 'undefined') {
-          try { new QRCode(container, { text: currentPageUrl, width: 72, height: 72, colorDark: '#009FE3', colorLight: '#FFFFFF', correctLevel: QRCode.CorrectLevel.M }); } catch (error) { showFallbackQR(); }
-        } else { setTimeout(() => { if (typeof QRCode !== 'undefined') generateRealQRCode(); else showFallbackQR(); }, 500); }
+          try {
+            new QRCode(container, {
+              text: currentPageUrl,
+              width: 72,
+              height: 72,
+              colorDark: '#009FE3',
+              colorLight: '#FFFFFF',
+              correctLevel: QRCode.CorrectLevel.M
+            });
+          } catch (error) {
+            showFallbackQR();
+          }
+        } else {
+          setTimeout(function() {
+            if (typeof QRCode !== 'undefined') {
+              generateRealQRCode();
+            } else {
+              showFallbackQR();
+            }
+          }, 500);
+        }
       }
-      function showFallbackQR() { const container = document.getElementById('qrCodeContainer'); if (!container) return; container.innerHTML = '<div style="width:72px;height:72px;display:flex;align-items:center;justify-content:center;background:#009FE3;color:white;border-radius:0.5rem;font-size:8px;text-align:center;padding:4px;">TAP TO<br>OPEN<br>LINK</div>'; }
-      window.openCurrentUrl = function() { window.open(currentPageUrl, '_blank'); showToast('Opening profile link...', 'info'); };
-      function showToast(message, type = 'success') {
-        const container = document.getElementById('toastContainer');
-        const toast = document.createElement('div'); toast.className = 'toast';
-        const iconMap = { success: 'fa-circle-check text-emerald-400', error: 'fa-circle-exclamation text-red-400', info: 'fa-circle-info text-blue-400' };
-        toast.innerHTML = `<i class="fa-solid ${iconMap[type] || iconMap.success}"></i> ${message}`;
+
+      // Fallback QR display
+      function showFallbackQR() {
+        var container = document.getElementById('qrCodeContainer');
+        if (!container) return;
+        container.innerHTML = '<div style="width:72px;height:72px;display:flex;align-items:center;justify-content:center;background:#009FE3;color:white;border-radius:0.5rem;font-size:8px;text-align:center;padding:4px;">TAP TO<br>OPEN<br>LINK</div>';
+      }
+
+      // Open current URL
+      window.openCurrentUrl = function() {
+        window.open(currentPageUrl, '_blank');
+        showToast('Opening profile link...', 'info');
+      };
+
+      // Toast notification
+      function showToast(message, type) {
+        type = type || 'success';
+        var container = document.getElementById('toastContainer');
+        var toast = document.createElement('div');
+        toast.className = 'toast';
+        
+        var icons = {
+          success: 'fa-circle-check text-emerald-400',
+          error: 'fa-circle-exclamation text-red-400',
+          info: 'fa-circle-info text-blue-400'
+        };
+        
+        toast.innerHTML = '<i class="fa-solid ' + (icons[type] || icons.success) + '"></i> ' + message;
         container.appendChild(toast);
-        setTimeout(() => { toast.style.opacity = '0'; toast.style.transition = 'opacity 0.2s ease'; setTimeout(() => toast.remove(), 250); }, 2400);
+        
+        setTimeout(function() {
+          toast.style.opacity = '0';
+          toast.style.transition = 'opacity 0.2s ease';
+          setTimeout(function() { toast.remove(); }, 250);
+        }, 2400);
       }
+
+      // Copy text to clipboard
       window.copyText = function(text) {
-        if (!navigator.clipboard) { const t = document.createElement('textarea'); t.value = text; t.style.position = 'fixed'; t.style.opacity = '0'; document.body.appendChild(t); t.select(); document.execCommand('copy'); document.body.removeChild(t); showToast('Copied to clipboard', 'success'); return; }
-        navigator.clipboard.writeText(text).then(() => showToast('Copied successfully', 'success')).catch(() => showToast('Unable to copy', 'error'));
+        if (!navigator.clipboard) {
+          var textarea = document.createElement('textarea');
+          textarea.value = text;
+          textarea.style.position = 'fixed';
+          textarea.style.opacity = '0';
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textarea);
+          showToast('Copied to clipboard', 'success');
+          return;
+        }
+        navigator.clipboard.writeText(text).then(function() {
+          showToast('Copied successfully', 'success');
+        }).catch(function() {
+          showToast('Unable to copy', 'error');
+        });
       };
+
+      // Share profile
       window.shareProfile = function() {
-        const d = { title: 'Bogale Siyum - Director Hawassa District', text: 'Director Hawassa District · Cooperative Bank of Oromia', url: currentPageUrl };
-        if (navigator.share && navigator.canShare && navigator.canShare(d)) { navigator.share(d).then(() => showToast('Shared successfully', 'success')).catch(e => { if (e.name !== 'AbortError') { copyText(currentPageUrl); showToast('Link copied to clipboard', 'info'); } }); }
-        else { copyText(currentPageUrl); showToast('Profile link copied to clipboard', 'info'); }
+        var shareData = {
+          title: 'Bogale Siyum - Director Hawassa District',
+          text: 'Director Hawassa District · Cooperative Bank of Oromia',
+          url: currentPageUrl
+        };
+        
+        if (navigator.share && navigator.canShare && navigator.canShare(shareData)) {
+          navigator.share(shareData).then(function() {
+            showToast('Shared successfully', 'success');
+          }).catch(function(error) {
+            if (error.name !== 'AbortError') {
+              window.copyText(currentPageUrl);
+              showToast('Link copied to clipboard', 'info');
+            }
+          });
+        } else {
+          window.copyText(currentPageUrl);
+          showToast('Profile link copied to clipboard', 'info');
+        }
       };
+
+      // Download vCard
       window.downloadVCard = function() {
-        const v = `BEGIN:VCARD\nVERSION:3.0\nFN:Bogale Siyum\nN:Siyum;Bogale;;;\nORG:Cooperative Bank of Oromia\nTITLE:Director Hawassa District\nROLE:Director\nTEL;TYPE=WORK,VOICE:+251913329703\nEMAIL;TYPE=INTERNET:Bogsiyum@gmail.com\nURL:${currentPageUrl}\nADR;TYPE=WORK:;;Hawassa District Headquarters;Hawassa;;;Ethiopia\nX-SOCIALPROFILE;TYPE=LinkedIn:https://www.linkedin.com/in/bogale-siyum-6b6079302\nX-SOCIALPROFILE;TYPE=Telegram:https://t.me/Gifti2026\nX-SOCIALPROFILE;TYPE=WhatsApp:https://wa.me/251913329703\nNOTE:Digital Identity - Cooperative Bank of Oromia\nEND:VCARD`;
-        const b = new Blob([v], { type: 'text/vcard;charset=utf-8;' }); const u = URL.createObjectURL(b);
-        const l = document.createElement('a'); l.href = u; l.download = 'Bogale_Siyum_CoopBank.vcf'; document.body.appendChild(l); l.click(); document.body.removeChild(l); URL.revokeObjectURL(u);
+        var vCard = 'BEGIN:VCARD\r\n' +
+          'VERSION:3.0\r\n' +
+          'FN:Bogale Siyum\r\n' +
+          'N:Siyum;Bogale;;;\r\n' +
+          'ORG:Cooperative Bank of Oromia\r\n' +
+          'TITLE:Director Hawassa District\r\n' +
+          'ROLE:Director\r\n' +
+          'TEL;TYPE=WORK,VOICE:+251913329703\r\n' +
+          'EMAIL;TYPE=INTERNET:Bogsiyum@gmail.com\r\n' +
+          'URL:' + currentPageUrl + '\r\n' +
+          'ADR;TYPE=WORK:;;Hawassa District Headquarters;Hawassa;;;Ethiopia\r\n' +
+          'X-SOCIALPROFILE;TYPE=LinkedIn:https://www.linkedin.com/in/bogale-siyum-6b6079302\r\n' +
+          'X-SOCIALPROFILE;TYPE=Telegram:https://t.me/Gifti2026\r\n' +
+          'X-SOCIALPROFILE;TYPE=WhatsApp:https://wa.me/251913329703\r\n' +
+          'NOTE:Digital Identity - Cooperative Bank of Oromia\r\n' +
+          'END:VCARD';
+        
+        var blob = new Blob([vCard], { type: 'text/vcard;charset=utf-8;' });
+        var url = URL.createObjectURL(blob);
+        var link = document.createElement('a');
+        link.href = url;
+        link.download = 'Bogale_Siyum_CoopBank.vcf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
         showToast('Contact Saved Successfully', 'success');
       };
-      window.addEventListener('DOMContentLoaded', () => setTimeout(generateRealQRCode, 300));
-      if (document.readyState === 'complete' || document.readyState === 'interactive') setTimeout(generateRealQRCode, 100);
+
+      // Initialize
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+          setTimeout(generateRealQRCode, 300);
+        });
+      } else {
+        setTimeout(generateRealQRCode, 100);
+      }
     })();
   </script>
 </body>
