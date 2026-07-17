@@ -8,7 +8,6 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Bogale Siyum">
-  
   <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https: data: blob:;">
   <link rel="manifest" href="data:application/json,{}">
   <title>Bogale Siyum · Cooperative Bank of Oromia</title>
@@ -21,220 +20,71 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
-    :root {
-      --brand-cyan: #009FE3;
-      --brand-blue: #0077B5;
-      --accent-orange: #F7931E;
-      --white: #FFFFFF;
-      --charcoal: #1F2937;
-      --light-gray: #F8FAFD;
-    }
-
+    :root { --brand-cyan: #009FE3; --brand-blue: #0077B5; --accent-orange: #F7931E; --white: #FFFFFF; --charcoal: #1F2937; --light-gray: #F8FAFD; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      background: linear-gradient(160deg, #33b5e8 0%, #009FE3 25%, #00a8ee 40%, #0090d6 60%, #0082c4 80%, #0077B5 100%);
-      background-attachment: fixed;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: clamp(1rem, 4vw, 1.8rem);
-      position: relative;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background: 
-        radial-gradient(ellipse at 50% 30%, rgba(255, 255, 255, 0.35) 0%, transparent 50%),
-        radial-gradient(ellipse at 20% 75%, rgba(0, 159, 227, 0.3) 0%, transparent 45%),
-        radial-gradient(ellipse at 80% 20%, rgba(255, 255, 255, 0.25) 0%, transparent 40%),
-        radial-gradient(ellipse at 50% 50%, rgba(0, 168, 238, 0.25) 0%, transparent 60%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .particle {
-      position: fixed; border-radius: 50%; pointer-events: none; z-index: 0;
-      animation: floatParticle 15s infinite ease-in-out;
-    }
-    .particle:nth-child(1) { width: 120px; height: 120px; top: 5%; left: 3%; background: rgba(255, 255, 255, 0.5); }
-    .particle:nth-child(2) { width: 70px; height: 70px; top: 15%; right: 5%; background: rgba(255, 255, 255, 0.4); animation-duration: 19s; animation-delay: -5s; }
-    .particle:nth-child(3) { width: 55px; height: 55px; bottom: 18%; left: 6%; background: rgba(51, 181, 232, 0.45); animation-duration: 17s; animation-delay: -9s; }
-    .particle:nth-child(4) { width: 80px; height: 80px; top: 50%; right: 8%; background: rgba(255, 255, 255, 0.38); animation-duration: 21s; animation-delay: -3s; }
-    .particle:nth-child(5) { width: 45px; height: 45px; bottom: 30%; left: 15%; background: rgba(0, 168, 238, 0.5); animation-duration: 23s; animation-delay: -7s; }
-
-    @keyframes floatParticle {
-      0%, 100% { transform: translateY(0px) translateX(0px) scale(1); opacity: 0.4; }
-      25% { transform: translateY(-35px) translateX(20px) scale(1.1); opacity: 0.75; }
-      50% { transform: translateY(-15px) translateX(-22px) scale(0.9); opacity: 0.5; }
-      75% { transform: translateY(-40px) translateX(10px) scale(1.05); opacity: 0.65; }
-    }
-
-    .card-enter {
-      animation: cardRise 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-      opacity: 0; transform: translateY(28px) scale(0.97);
-    }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: linear-gradient(160deg, #33b5e8 0%, #009FE3 25%, #00a8ee 40%, #0090d6 60%, #0082c4 80%, #0077B5 100%); background-attachment: fixed; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: clamp(1rem, 4vw, 1.8rem); position: relative; overflow-x: hidden; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    body::before { content: ""; position: fixed; inset: 0; background: radial-gradient(ellipse at 50% 30%, rgba(255,255,255,0.35) 0%, transparent 50%), radial-gradient(ellipse at 20% 75%, rgba(0,159,227,0.3) 0%, transparent 45%), radial-gradient(ellipse at 80% 20%, rgba(255,255,255,0.25) 0%, transparent 40%), radial-gradient(ellipse at 50% 50%, rgba(0,168,238,0.25) 0%, transparent 60%); pointer-events: none; z-index: 0; }
+    .particle { position: fixed; border-radius: 50%; pointer-events: none; z-index: 0; animation: floatParticle 15s infinite ease-in-out; }
+    .particle:nth-child(1) { width: 120px; height: 120px; top: 5%; left: 3%; background: rgba(255,255,255,0.5); }
+    .particle:nth-child(2) { width: 70px; height: 70px; top: 15%; right: 5%; background: rgba(255,255,255,0.4); animation-duration: 19s; animation-delay: -5s; }
+    .particle:nth-child(3) { width: 55px; height: 55px; bottom: 18%; left: 6%; background: rgba(51,181,232,0.45); animation-duration: 17s; animation-delay: -9s; }
+    .particle:nth-child(4) { width: 80px; height: 80px; top: 50%; right: 8%; background: rgba(255,255,255,0.38); animation-duration: 21s; animation-delay: -3s; }
+    .particle:nth-child(5) { width: 45px; height: 45px; bottom: 30%; left: 15%; background: rgba(0,168,238,0.5); animation-duration: 23s; animation-delay: -7s; }
+    @keyframes floatParticle { 0%,100%{transform:translateY(0)translateX(0)scale(1);opacity:0.4} 25%{transform:translateY(-35px)translateX(20px)scale(1.1);opacity:0.75} 50%{transform:translateY(-15px)translateX(-22px)scale(0.9);opacity:0.5} 75%{transform:translateY(-40px)translateX(10px)scale(1.05);opacity:0.65} }
+    .card-enter { animation: cardRise 0.7s cubic-bezier(0.16,1,0.3,1) forwards; opacity: 0; transform: translateY(28px) scale(0.97); }
     @keyframes cardRise { to { opacity: 1; transform: translateY(0) scale(1); } }
-
-    .premium-card {
-      background: #FFFFFF;
-      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15), 0 12px 24px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
-    }
-
-    .logo-float {
-      display: flex; align-items: center; justify-content: center;
-      width: 160px; height: 42px; margin-bottom: 0.75rem;
-    }
-    .logo-float img {
-      width: 100%; height: 100%; object-fit: contain;
-      filter: brightness(0) invert(1); transition: transform 0.35s ease;
-    }
+    .premium-card { background: #FFFFFF; box-shadow: 0 30px 60px rgba(0,0,0,0.15), 0 12px 24px rgba(0,0,0,0.08), 0 0 0 1px rgba(255,255,255,0.1) inset; }
+    .logo-float { display: flex; align-items: center; justify-content: center; width: 160px; height: 42px; margin-bottom: 0.75rem; }
+    .logo-float img { width: 100%; height: 100%; object-fit: contain; filter: brightness(0) invert(1); transition: transform 0.35s ease; }
     .logo-float img:hover { transform: scale(1.04); }
-
-    .header-with-wave {
-      position: relative; padding: 1.5rem 1.5rem 4rem 1.5rem;
-      display: flex; flex-direction: column; align-items: center; text-align: center; overflow: visible;
-      background: linear-gradient(180deg, #009FE3 0%, #0088CC 40%, #0077B5 100%);
-    }
-
-    .wave-container {
-      position: absolute; bottom: -2px; left: 0; width: 100%; line-height: 0; z-index: 15; pointer-events: none;
-    }
+    .header-with-wave { position: relative; padding: 1.5rem 1.5rem 4rem 1.5rem; display: flex; flex-direction: column; align-items: center; text-align: center; overflow: visible; background: linear-gradient(180deg, #009FE3 0%, #0088CC 40%, #0077B5 100%); }
+    .wave-container { position: absolute; bottom: -2px; left: 0; width: 100%; line-height: 0; z-index: 15; pointer-events: none; }
     .wave-container svg { width: 100%; height: auto; display: block; }
-
-    .floating-toolbar {
-      display: flex; justify-content: center; align-items: center; gap: 0.5rem;
-      padding: 0 1.25rem; margin-top: -2.6rem; position: relative; z-index: 30; width: 100%;
-    }
-
-    .action-pill {
-      width: 2.6rem; height: 2.6rem; min-width: 2.6rem; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      background: rgba(255, 255, 255, 0.94); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.7);
-      box-shadow: 0 8px 22px rgba(0, 100, 150, 0.1), 0 2px 6px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.9);
-      color: #009FE3; font-size: 0.95rem;
-      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1.15); cursor: pointer; flex-shrink: 0;
-    }
-    .action-pill:hover { transform: translateY(-4px); background: #ffffff; box-shadow: 0 16px 32px rgba(0, 130, 210, 0.22); color: #00608a; }
+    .floating-toolbar { display: flex; justify-content: center; align-items: center; gap: 0.5rem; padding: 0 1.25rem; margin-top: -2.6rem; position: relative; z-index: 30; width: 100%; }
+    .action-pill { width: 2.6rem; height: 2.6rem; min-width: 2.6rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.94); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.7); box-shadow: 0 8px 22px rgba(0,100,150,0.1), 0 2px 6px rgba(0,0,0,0.04), inset 0 1px 0 rgba(255,255,255,0.9); color: #009FE3; font-size: 0.95rem; transition: all 0.3s cubic-bezier(0.25,0.8,0.25,1.15); cursor: pointer; flex-shrink: 0; }
+    .action-pill:hover { transform: translateY(-4px); background: #ffffff; box-shadow: 0 16px 32px rgba(0,130,210,0.22); color: #00608a; }
     .action-pill:active { transform: scale(0.9); }
-
-    .section-divider {
-      display: flex; align-items: center; gap: 0.75rem; padding: 0 1.25rem;
-    }
-    .section-divider::before, .section-divider::after {
-      content: ''; flex: 1; height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(0, 159, 227, 0.15), transparent);
-    }
+    .section-divider { display: flex; align-items: center; gap: 0.75rem; padding: 0 1.25rem; }
+    .section-divider::before,.section-divider::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(0,159,227,0.15), transparent); }
     .divider-dot { width: 5px; height: 5px; border-radius: 50%; background: #009FE3; opacity: 0.4; flex-shrink: 0; }
-
-    .glass-panel {
-      background: rgba(255, 255, 255, 0.82); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.6);
-    }
-
-    .avatar-ring {
-      box-shadow: 0 0 0 6px white, 0 0 0 10px rgba(0, 159, 227, 0.1), 0 22px 44px rgba(0, 0, 0, 0.14);
-      transition: transform 0.35s ease;
-    }
+    .glass-panel { background: rgba(255,255,255,0.82); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.6); }
+    .avatar-ring { box-shadow: 0 0 0 6px white, 0 0 0 10px rgba(0,159,227,0.1), 0 22px 44px rgba(0,0,0,0.14); transition: transform 0.35s ease; }
     .avatar-ring:hover { transform: scale(1.04); }
-
-    .status-dot {
-      background: #10B981; width: 14px; height: 14px; animation: pulseGreen 2s infinite;
-    }
-    @keyframes pulseGreen {
-      0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-      70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
-    }
-
-    .verified-badge {
-      background: #009FE3; color: white; border-radius: 50%;
-      width: 26px; height: 26px; display: flex; align-items: center; justify-content: center;
-      font-size: 12px; box-shadow: 0 3px 12px rgba(0, 159, 227, 0.5);
-      position: absolute; top: -3px; right: -3px; border: 3px solid white;
-    }
-
-    .contact-card {
-      background: #FFFFFF; border-left: 4px solid #009FE3;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
-      transition: all 0.32s cubic-bezier(0.25, 0.8, 0.25, 1);
-    }
-    .contact-card:hover {
-      background: #FAFDFF; border-left-color: #F7931E;
-      box-shadow: 0 5px 14px rgba(0, 80, 130, 0.05); transform: translateX(4px) translateY(-1px);
-    }
-
-    .icon-circle { background: #E8F4FD; color: #009FE3; box-shadow: 0 2px 6px rgba(0, 140, 200, 0.1); }
-
-    .toast-container {
-      position: fixed; top: 1.2rem; right: 1.2rem; z-index: 9999;
-      display: flex; flex-direction: column; gap: 0.6rem; pointer-events: none;
-    }
-    .toast {
-      background: rgba(31, 41, 55, 0.93); backdrop-filter: blur(18px); color: white;
-      padding: 0.7rem 1.2rem; border-radius: 1rem; box-shadow: 0 18px 36px rgba(0, 0, 0, 0.2);
-      font-weight: 500; font-size: 0.85rem; display: flex; align-items: center; gap: 0.5rem;
-      animation: slideToast 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-      border: 1px solid rgba(255, 255, 255, 0.1); pointer-events: auto;
-    }
-    @keyframes slideToast {
-      from { transform: translateX(110%); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
-    }
-
+    .status-dot { background: #10B981; width: 14px; height: 14px; animation: pulseGreen 2s infinite; }
+    @keyframes pulseGreen { 0%{box-shadow:0 0 0 0 rgba(16,185,129,0.7)} 70%{box-shadow:0 0 0 10px rgba(16,185,129,0)} 100%{box-shadow:0 0 0 0 rgba(16,185,129,0)} }
+    .verified-badge { background: #009FE3; color: white; border-radius: 50%; width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; font-size: 12px; box-shadow: 0 3px 12px rgba(0,159,227,0.5); position: absolute; top: -3px; right: -3px; border: 3px solid white; }
+    .contact-card { background: #FFFFFF; border-left: 4px solid #009FE3; box-shadow: 0 1px 2px rgba(0,0,0,0.02); transition: all 0.32s cubic-bezier(0.25,0.8,0.25,1); }
+    .contact-card:hover { background: #FAFDFF; border-left-color: #F7931E; box-shadow: 0 5px 14px rgba(0,80,130,0.05); transform: translateX(4px) translateY(-1px); }
+    .icon-circle { background: #E8F4FD; color: #009FE3; box-shadow: 0 2px 6px rgba(0,140,200,0.1); }
+    .toast-container { position: fixed; top: 1.2rem; right: 1.2rem; z-index: 9999; display: flex; flex-direction: column; gap: 0.6rem; pointer-events: none; }
+    .toast { background: rgba(31,41,55,0.93); backdrop-filter: blur(18px); color: white; padding: 0.7rem 1.2rem; border-radius: 1rem; box-shadow: 0 18px 36px rgba(0,0,0,0.2); font-weight: 500; font-size: 0.85rem; display: flex; align-items: center; gap: 0.5rem; animation: slideToast 0.35s cubic-bezier(0.16,1,0.3,1); border: 1px solid rgba(255,255,255,0.1); pointer-events: auto; }
+    @keyframes slideToast { from{transform:translateX(110%);opacity:0} to{transform:translateX(0);opacity:1} }
     .qr-clickable { cursor: pointer; transition: transform 0.3s ease; }
     .qr-clickable:hover { transform: scale(1.02); }
-
-    #qrCodeContainer {
-      border-radius: 0.9rem; background: white; padding: 4px;
-      display: flex; align-items: center; justify-content: center;
-    }
+    #qrCodeContainer { border-radius: 0.9rem; background: white; padding: 4px; display: flex; align-items: center; justify-content: center; }
     #qrCodeContainer img, #qrCodeContainer canvas { display: block; border-radius: 0.5rem; }
-
-    /* Confirm dialog */
-    .confirm-overlay {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.55); backdrop-filter: blur(4px);
-      z-index: 10000; display: flex; align-items: center; justify-content: center;
-      animation: fadeIn 0.2s ease;
-    }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    .confirm-dialog {
-      background: white; border-radius: 1.5rem; padding: 1.5rem; text-align: center;
-      max-width: 300px; width: 90%; box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-      animation: scaleIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    @keyframes scaleIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-    .confirm-btn {
-      display: block; width: 100%; padding: 0.85rem; margin: 0.4rem 0;
-      border-radius: 1rem; font-weight: 600; font-size: 0.9rem; cursor: pointer;
-      transition: all 0.2s ease; border: none;
-    }
+    .confirm-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(6px); z-index: 10000; display: flex; align-items: center; justify-content: center; animation: fadeIn 0.2s ease; }
+    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+    .confirm-dialog { background: white; border-radius: 1.8rem; padding: 1.8rem; text-align: center; max-width: 340px; width: 90%; box-shadow: 0 25px 60px rgba(0,0,0,0.35); animation: scaleIn 0.3s cubic-bezier(0.16,1,0.3,1); }
+    @keyframes scaleIn { from{transform:scale(0.85);opacity:0} to{transform:scale(1);opacity:1} }
+    .confirm-dialog .qr-preview-large { display: flex; justify-content: center; margin: 1rem 0; }
+    .confirm-dialog .qr-preview-large canvas { width: 160px; height: 160px; border-radius: 1rem; padding: 8px; background: white; box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+    .confirm-btn { display: block; width: 100%; padding: 0.9rem; margin: 0.4rem 0; border-radius: 1rem; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: all 0.2s ease; border: none; }
     .confirm-btn:active { transform: scale(0.96); }
+    .quiet-zone { background: white; padding: 8px; border-radius: 1rem; display: inline-block; }
   </style>
 </head>
 <body class="antialiased">
-
   <div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div><div class="particle"></div>
   <div id="toastContainer" class="toast-container" aria-live="polite"></div>
 
   <main class="relative z-10 w-full max-w-[430px] bg-white rounded-[2.6rem] premium-card overflow-hidden flex flex-col card-enter" role="main">
-    
     <header class="header-with-wave">
       <div class="absolute inset-0 opacity-[0.04] pointer-events-none" style="background-image: repeating-linear-gradient(45deg, #ffffff 0px, #ffffff 2px, transparent 2px, transparent 10px);"></div>
-
       <div class="logo-float relative z-10">
         <img id="brandLogo" src="logo.png" alt="Cooperative Bank of Oromia" loading="eager" />
         <div id="brandLogoFallback" style="display:none;" class="w-full h-full items-center justify-center font-bold text-white tracking-wider text-lg">COOPBANK</div>
       </div>
-
       <div class="relative z-10 mb-3">
         <div class="w-28 h-28 rounded-full avatar-ring overflow-hidden">
           <img id="avatarImage" src="haile-DU79oNHd.jpeg" alt="Bogale Siyum" class="w-full h-full object-cover" loading="eager" />
@@ -242,22 +92,15 @@
         <span class="absolute bottom-2.5 right-2.5 status-dot border-[3px] border-white rounded-full"></span>
         <span class="verified-badge" title="Verified Account"><i class="fa-solid fa-check"></i></span>
       </div>
-
-      <!-- Name: 1.75rem -->
       <h1 class="relative z-10 text-[1.75rem] font-extrabold text-white tracking-tight drop-shadow-md leading-tight">Bogale Siyum</h1>
-      
-      <!-- Director · Hawassa District: 0.85rem -->
       <div class="relative z-10 flex items-center justify-center gap-2 mt-1.5">
         <span class="bg-white/18 text-white text-[0.85rem] font-semibold px-3 py-0.5 rounded-full backdrop-blur-sm tracking-wide">Director</span>
         <span class="text-white/70 text-[0.9rem] font-light">·</span>
         <span class="text-white/85 text-[0.85rem] font-medium tracking-wide">Hawassa District</span>
       </div>
-      
-      <!-- Company: 0.9rem -->
       <p class="relative z-10 text-[0.9rem] font-medium text-white/80 mt-2 flex items-center gap-1.5 tracking-wide">
         <i class="fa-solid fa-building-columns text-[0.8rem] opacity-80"></i> Cooperative Bank of Oromia
       </p>
-
       <div class="wave-container">
         <svg viewBox="0 0 500 100" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M0 55 C60 48 100 65 160 68 C210 70 250 58 300 55 C350 52 390 62 440 58 C470 55 490 52 500 52 L500 100 L0 100 Z" fill="#FFFFFF"/>
@@ -301,7 +144,7 @@
         <div id="qrCodeContainer" class="w-[72px] h-[72px] shadow-sm"></div>
         <div>
           <p class="text-sm font-bold text-gray-800 flex items-center gap-1.5"><i class="fa-solid fa-qrcode text-[#009FE3]"></i> Digital Business Card</p>
-          <p class="text-[11px] text-gray-500 mt-0.5">Tap QR to download image</p>
+          <p class="text-[11px] text-gray-500 mt-0.5">Tap QR to download HD image</p>
           <p class="text-[10px] text-gray-400 mt-1 flex items-center gap-1"><i class="fa-solid fa-circle-check text-[#009FE3]"></i> Verified by CoopBank</p>
         </div>
       </div>
@@ -322,28 +165,46 @@
       var currentPageUrl = window.location.href;
       var img = document.getElementById('brandLogo');
       if (img) img.onerror = function() { img.style.display = 'none'; var f = document.getElementById('brandLogoFallback'); if (f) f.style.display = 'flex'; };
+
       function generateRealQRCode() {
         var c = document.getElementById('qrCodeContainer'); if (!c) return; c.innerHTML = '';
-        if (typeof QRCode !== 'undefined') { try { new QRCode(c, { text: currentPageUrl, width: 72, height: 72, colorDark: '#009FE3', colorLight: '#FFFFFF', correctLevel: QRCode.CorrectLevel.M }); } catch (e) { showFallbackQR(); } }
-        else { showFallbackQR(); }
+        if (typeof QRCode !== 'undefined') { new QRCode(c, { text: currentPageUrl, width: 64, height: 64, colorDark: '#009FE3', colorLight: '#FFFFFF', correctLevel: QRCode.CorrectLevel.M }); }
+        else { c.innerHTML = '<div style="width:64px;height:64px;display:flex;align-items:center;justify-content:center;background:#009FE3;color:white;border-radius:0.5rem;font-size:7px;text-align:center;padding:4px;font-weight:bold;">TAP TO<br>DOWNLOAD</div>'; }
       }
-      function showFallbackQR() { var c = document.getElementById('qrCodeContainer'); if (!c) return; c.innerHTML = '<div style="width:72px;height:72px;display:flex;align-items:center;justify-content:center;background:#009FE3;color:white;border-radius:0.5rem;font-size:8px;text-align:center;padding:4px;font-weight:bold;">TAP TO<br>DOWNLOAD</div>'; }
+
+      function generateLargeQR(callback) {
+        var tempDiv = document.createElement('div');
+        tempDiv.style.position = 'absolute'; tempDiv.style.left = '-9999px'; tempDiv.style.top = '-9999px';
+        document.body.appendChild(tempDiv);
+        if (typeof QRCode !== 'undefined') {
+          new QRCode(tempDiv, { text: currentPageUrl, width: 200, height: 200, colorDark: '#009FE3', colorLight: '#FFFFFF', correctLevel: QRCode.CorrectLevel.M });
+          setTimeout(function() { var canvas = tempDiv.querySelector('canvas'); if (canvas && callback) callback(canvas); document.body.removeChild(tempDiv); }, 300);
+        } else { document.body.removeChild(tempDiv); if (callback) callback(null); }
+      }
+
       window.confirmDownloadQR = function() {
         var existing = document.querySelector('.confirm-overlay'); if (existing) existing.remove();
         var overlay = document.createElement('div'); overlay.className = 'confirm-overlay';
         overlay.onclick = function(e) { if (e.target === overlay) overlay.remove(); };
         var dialog = document.createElement('div'); dialog.className = 'confirm-dialog';
-        dialog.innerHTML = '<div style="font-size:2.5rem;margin-bottom:0.5rem;">📱</div><h3 style="font-size:1.1rem;font-weight:700;color:#1F2937;margin-bottom:0.3rem;">Download QR Code?</h3><p style="font-size:0.8rem;color:#6B7280;margin-bottom:1rem;">Save this QR image to your device</p><button class="confirm-btn" style="background:#009FE3;color:white;" id="confirmYes"><i class="fa-solid fa-download"></i> Yes, Download</button><button class="confirm-btn" style="background:#F3F4F6;color:#4B5563;" id="confirmNo">No, Cancel</button>';
+        dialog.innerHTML = '<h3 style="font-size:1.15rem;font-weight:700;color:#1F2937;margin-bottom:0.2rem;">Download QR Code</h3><p style="font-size:0.8rem;color:#6B7280;margin-bottom:0.5rem;">Scannable · Crystal Clear</p><div class="qr-preview-large"><div class="quiet-zone"><canvas id="previewCanvas" width="168" height="168" style="border-radius:0.5rem;"></canvas></div></div><button class="confirm-btn" style="background:#009FE3;color:white;" id="confirmDownloadPNG"><i class="fa-solid fa-download"></i> Download QR Image</button><button class="confirm-btn" style="background:#F3F4F6;color:#4B5563;" id="confirmCancel">Cancel</button>';
         overlay.appendChild(dialog); document.body.appendChild(overlay);
-        document.getElementById('confirmYes').onclick = function() { overlay.remove(); downloadQRImage(); };
-        document.getElementById('confirmNo').onclick = function() { overlay.remove(); };
+        generateLargeQR(function(largeCanvas) {
+          var previewCanvas = document.getElementById('previewCanvas');
+          if (previewCanvas && largeCanvas) { var ctx = previewCanvas.getContext('2d'); ctx.fillStyle = '#FFFFFF'; ctx.fillRect(0, 0, 168, 168); ctx.drawImage(largeCanvas, 0, 0, 168, 168); }
+        });
+        document.getElementById('confirmDownloadPNG').onclick = function() { overlay.remove(); downloadQRPNG(); };
+        document.getElementById('confirmCancel').onclick = function() { overlay.remove(); };
       };
-      function downloadQRImage() {
-        var canvas = document.querySelector('#qrCodeContainer canvas');
-        if (!canvas) { showToast('QR code generating... tap again', 'info'); return; }
-        var link = document.createElement('a'); link.download = 'Bogale_Siyum_QR.png'; link.href = canvas.toDataURL('image/png'); link.click();
-        showToast('QR code downloaded!', 'success');
+
+      function downloadQRPNG() {
+        generateLargeQR(function(largeCanvas) {
+          if (!largeCanvas) { showToast('QR library loading... try again', 'info'); return; }
+          var link = document.createElement('a'); link.download = 'Bogale_Siyum_QR.png'; link.href = largeCanvas.toDataURL('image/png'); link.click();
+          showToast('QR code downloaded!', 'success');
+        });
       }
+
       function showToast(m, t) {
         t = t || 'success'; var c = document.getElementById('toastContainer'), o = document.createElement('div'); o.className = 'toast';
         var i = { success: 'fa-circle-check text-emerald-400', error: 'fa-circle-exclamation text-red-400', info: 'fa-circle-info text-blue-400' };
