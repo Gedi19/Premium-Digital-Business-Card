@@ -12,6 +12,7 @@
   <link rel="manifest" href="data:application/json,{}">
   <title>Bogale Siyum · Cooperative Bank of Oromia</title>
 
+  <!-- REAL QR ENCODING LIBRARY -->
   <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
@@ -61,17 +62,18 @@
     @keyframes slideToast { from{transform:translateX(110%);opacity:0} to{transform:translateX(0);opacity:1} }
     .qr-clickable { cursor: pointer; transition: transform 0.3s ease; }
     .qr-clickable:hover { transform: scale(1.02); }
-    #qrCodeContainer { border-radius: 0.9rem; background: white; padding: 4px; display: flex; align-items: center; justify-content: center; }
-    #qrCodeContainer img, #qrCodeContainer canvas { display: block; border-radius: 0.5rem; }
+    #qrCodeContainer { display: flex; align-items: center; justify-content: center; }
+    #qrCodeContainer img, #qrCodeContainer canvas { display: block; }
     .confirm-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(6px); z-index: 10000; display: flex; align-items: center; justify-content: center; animation: fadeIn 0.2s ease; }
     @keyframes fadeIn { from{opacity:0} to{opacity:1} }
-    .confirm-dialog { background: white; border-radius: 1.8rem; padding: 1.8rem; text-align: center; max-width: 340px; width: 90%; box-shadow: 0 25px 60px rgba(0,0,0,0.35); animation: scaleIn 0.3s cubic-bezier(0.16,1,0.3,1); }
+    .confirm-dialog { background: white; border-radius: 1.8rem; padding: 1.8rem; text-align: center; max-width: 360px; width: 92%; box-shadow: 0 25px 60px rgba(0,0,0,0.35); animation: scaleIn 0.3s cubic-bezier(0.16,1,0.3,1); }
     @keyframes scaleIn { from{transform:scale(0.85);opacity:0} to{transform:scale(1);opacity:1} }
     .confirm-dialog .qr-preview-large { display: flex; justify-content: center; margin: 1rem 0; }
-    .confirm-dialog .qr-preview-large canvas { width: 160px; height: 160px; border-radius: 1rem; padding: 8px; background: white; box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+    .confirm-dialog .qr-preview-large canvas { width: 180px; height: 180px; display: block; border-radius: 0.5rem; }
     .confirm-btn { display: block; width: 100%; padding: 0.9rem; margin: 0.4rem 0; border-radius: 1rem; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: all 0.2s ease; border: none; }
     .confirm-btn:active { transform: scale(0.96); }
-    .quiet-zone { background: white; padding: 8px; border-radius: 1rem; display: inline-block; }
+    .btn-row { display: flex; gap: 0.5rem; }
+    .btn-row .confirm-btn { flex: 1; }
   </style>
 </head>
 <body class="antialiased">
@@ -141,10 +143,10 @@
 
     <div class="px-5 pt-1 pb-2">
       <div class="glass-panel p-3.5 rounded-2xl flex items-center gap-4 qr-clickable" onclick="confirmDownloadQR()">
-        <div id="qrCodeContainer" class="w-[72px] h-[72px] shadow-sm"></div>
+        <div id="qrCodeContainer" class="w-[64px] h-[64px]"></div>
         <div>
           <p class="text-sm font-bold text-gray-800 flex items-center gap-1.5"><i class="fa-solid fa-qrcode text-[#009FE3]"></i> Digital Business Card</p>
-          <p class="text-[11px] text-gray-500 mt-0.5">Tap QR to download HD image</p>
+          <p class="text-[11px] text-gray-500 mt-0.5">Tap QR to download or share</p>
           <p class="text-[10px] text-gray-400 mt-1 flex items-center gap-1"><i class="fa-solid fa-circle-check text-[#009FE3]"></i> Verified by CoopBank</p>
         </div>
       </div>
@@ -166,19 +168,21 @@
       var img = document.getElementById('brandLogo');
       if (img) img.onerror = function() { img.style.display = 'none'; var f = document.getElementById('brandLogoFallback'); if (f) f.style.display = 'flex'; };
 
+      // REAL QR using qrcodejs - cyan for display
       function generateRealQRCode() {
         var c = document.getElementById('qrCodeContainer'); if (!c) return; c.innerHTML = '';
-        if (typeof QRCode !== 'undefined') { new QRCode(c, { text: currentPageUrl, width: 64, height: 64, colorDark: '#009FE3', colorLight: '#FFFFFF', correctLevel: QRCode.CorrectLevel.M }); }
-        else { c.innerHTML = '<div style="width:64px;height:64px;display:flex;align-items:center;justify-content:center;background:#009FE3;color:white;border-radius:0.5rem;font-size:7px;text-align:center;padding:4px;font-weight:bold;">TAP TO<br>DOWNLOAD</div>'; }
+        if (typeof QRCode !== 'undefined') { new QRCode(c, { text: currentPageUrl, width: 64, height: 64, colorDark: '#009FE3', colorLight: '#FFFFFF', correctLevel: QRCode.CorrectLevel.H }); }
+        else { c.innerHTML = '<div style="width:64px;height:64px;display:flex;align-items:center;justify-content:center;background:#009FE3;color:white;border-radius:0.5rem;font-size:7px;text-align:center;padding:4px;font-weight:bold;">TAP</div>'; }
       }
 
-      function generateLargeQR(callback) {
+      // Generate large QR - cyan for preview, black for download
+      function generateLargeQR(color, callback) {
         var tempDiv = document.createElement('div');
         tempDiv.style.position = 'absolute'; tempDiv.style.left = '-9999px'; tempDiv.style.top = '-9999px';
         document.body.appendChild(tempDiv);
         if (typeof QRCode !== 'undefined') {
-          new QRCode(tempDiv, { text: currentPageUrl, width: 200, height: 200, colorDark: '#009FE3', colorLight: '#FFFFFF', correctLevel: QRCode.CorrectLevel.M });
-          setTimeout(function() { var canvas = tempDiv.querySelector('canvas'); if (canvas && callback) callback(canvas); document.body.removeChild(tempDiv); }, 300);
+          new QRCode(tempDiv, { text: currentPageUrl, width: 256, height: 256, colorDark: color, colorLight: '#FFFFFF', correctLevel: QRCode.CorrectLevel.H });
+          setTimeout(function() { var canvas = tempDiv.querySelector('canvas'); if (canvas && callback) callback(canvas); document.body.removeChild(tempDiv); }, 400);
         } else { document.body.removeChild(tempDiv); if (callback) callback(null); }
       }
 
@@ -187,45 +191,51 @@
         var overlay = document.createElement('div'); overlay.className = 'confirm-overlay';
         overlay.onclick = function(e) { if (e.target === overlay) overlay.remove(); };
         var dialog = document.createElement('div'); dialog.className = 'confirm-dialog';
-        dialog.innerHTML = '<h3 style="font-size:1.15rem;font-weight:700;color:#1F2937;margin-bottom:0.2rem;">Download QR Code</h3><p style="font-size:0.8rem;color:#6B7280;margin-bottom:0.5rem;">Scannable · Crystal Clear</p><div class="qr-preview-large"><div class="quiet-zone"><canvas id="previewCanvas" width="168" height="168" style="border-radius:0.5rem;"></canvas></div></div><button class="confirm-btn" style="background:#009FE3;color:white;" id="confirmDownloadPNG"><i class="fa-solid fa-download"></i> Download QR Image</button><button class="confirm-btn" style="background:#F3F4F6;color:#4B5563;" id="confirmCancel">Cancel</button>';
+        dialog.innerHTML = 
+          '<h3 style="font-size:1.2rem;font-weight:700;color:#1F2937;margin-bottom:0.2rem;">QR Code</h3>' +
+          '<p style="font-size:0.8rem;color:#6B7280;margin-bottom:0.5rem;">High Quality · Scannable</p>' +
+          '<div class="qr-preview-large"><canvas id="previewCanvas" width="180" height="180" style="border-radius:0.5rem;"></canvas></div>' +
+          '<div class="btn-row">' +
+            '<button class="confirm-btn" style="background:#009FE3;color:white;" id="confirmDownload"><i class="fa-solid fa-download"></i> Download</button>' +
+            '<button class="confirm-btn" style="background:#1F2937;color:white;" id="confirmShare"><i class="fa-solid fa-share-nodes"></i> Share</button>' +
+          '</div>' +
+          '<button class="confirm-btn" style="background:#F3F4F6;color:#4B5563;" id="confirmCancel">Cancel</button>';
         overlay.appendChild(dialog); document.body.appendChild(overlay);
-        generateLargeQR(function(largeCanvas) {
+        
+        // Preview with cyan
+        generateLargeQR('#009FE3', function(largeCanvas) {
           var previewCanvas = document.getElementById('previewCanvas');
-          if (previewCanvas && largeCanvas) { var ctx = previewCanvas.getContext('2d'); ctx.fillStyle = '#FFFFFF'; ctx.fillRect(0, 0, 168, 168); ctx.drawImage(largeCanvas, 0, 0, 168, 168); }
+          if (previewCanvas && largeCanvas) { var ctx = previewCanvas.getContext('2d'); ctx.fillStyle = '#FFFFFF'; ctx.fillRect(0, 0, 180, 180); ctx.drawImage(largeCanvas, 0, 0, 180, 180); }
         });
-        document.getElementById('confirmDownloadPNG').onclick = function() { overlay.remove(); downloadQRPNG(); };
+        document.getElementById('confirmDownload').onclick = function() { overlay.remove(); downloadQRPNG(); };
+        document.getElementById('confirmShare').onclick = function() { overlay.remove(); shareQRCode(); };
         document.getElementById('confirmCancel').onclick = function() { overlay.remove(); };
       };
 
       function downloadQRPNG() {
-        generateLargeQR(function(largeCanvas) {
-          if (!largeCanvas) { showToast('QR library loading... try again', 'info'); return; }
-          var link = document.createElement('a'); link.download = 'Bogale_Siyum_QR.png'; link.href = largeCanvas.toDataURL('image/png'); link.click();
+        generateLargeQR('#000000', function(blackCanvas) {
+          if (!blackCanvas) { showToast('Generating... tap again', 'info'); return; }
+          var link = document.createElement('a'); link.download = 'Bogale_Siyum_QR.png'; link.href = blackCanvas.toDataURL('image/png'); link.click();
           showToast('QR code downloaded!', 'success');
         });
       }
 
-      function showToast(m, t) {
-        t = t || 'success'; var c = document.getElementById('toastContainer'), o = document.createElement('div'); o.className = 'toast';
-        var i = { success: 'fa-circle-check text-emerald-400', error: 'fa-circle-exclamation text-red-400', info: 'fa-circle-info text-blue-400' };
-        o.innerHTML = '<i class="fa-solid ' + (i[t] || i.success) + '"></i> ' + m; c.appendChild(o);
-        setTimeout(function() { o.style.opacity = '0'; o.style.transition = 'opacity 0.2s ease'; setTimeout(function() { o.remove(); }, 250); }, 2400);
+      function shareQRCode() {
+        generateLargeQR('#000000', function(blackCanvas) {
+          if (!blackCanvas) { showToast('Generating... tap again', 'info'); return; }
+          blackCanvas.toBlob(function(blob) {
+            var file = new File([blob], 'Bogale_Siyum_QR.png', { type: 'image/png' });
+            var shareData = { title: 'Bogale Siyum - QR Code', text: 'Scan to connect with Bogale Siyum', files: [file] };
+            if (navigator.share && navigator.canShare && navigator.canShare(shareData)) { navigator.share(shareData).then(function() { showToast('Shared!', 'success'); }).catch(function() { window.copyText(currentPageUrl); }); }
+            else { window.copyText(currentPageUrl); showToast('Link copied!', 'info'); }
+          }, 'image/png');
+        });
       }
-      window.copyText = function(t) {
-        if (!navigator.clipboard) { var a = document.createElement('textarea'); a.value = t; a.style.position = 'fixed'; a.style.opacity = '0'; document.body.appendChild(a); a.select(); document.execCommand('copy'); document.body.removeChild(a); showToast('Copied to clipboard', 'success'); return; }
-        navigator.clipboard.writeText(t).then(function() { showToast('Copied successfully', 'success'); }).catch(function() { showToast('Unable to copy', 'error'); });
-      };
-      window.shareProfile = function() {
-        var d = { title: 'Bogale Siyum - Director Hawassa District', text: 'Director Hawassa District · Cooperative Bank of Oromia', url: currentPageUrl };
-        if (navigator.share && navigator.canShare && navigator.canShare(d)) { navigator.share(d).then(function() { showToast('Shared successfully', 'success'); }).catch(function(e) { if (e.name !== 'AbortError') window.copyText(currentPageUrl); }); }
-        else { window.copyText(currentPageUrl); }
-      };
-      window.downloadVCard = function() {
-        var v = 'BEGIN:VCARD\r\nVERSION:3.0\r\nFN:Bogale Siyum\r\nN:Siyum;Bogale;;;\r\nORG:Cooperative Bank of Oromia\r\nTITLE:Director Hawassa District\r\nTEL;TYPE=CELL,VOICE:+251913329703\r\nEMAIL;TYPE=INTERNET:Bogsiyum@gmail.com\r\nURL:' + currentPageUrl + '\r\nADR;TYPE=WORK:;;Hawassa District Headquarters;Hawassa;;;Ethiopia\r\nEND:VCARD';
-        var b = new Blob(['\ufeff' + v], { type: 'text/vcard;charset=utf-8;' }); var u = URL.createObjectURL(b);
-        var l = document.createElement('a'); l.href = u; l.download = 'Bogale_Siyum.vcf'; document.body.appendChild(l); l.click(); document.body.removeChild(l); URL.revokeObjectURL(u);
-        showToast('Contact Saved Successfully', 'success');
-      };
+
+      function showToast(m, t) { t = t || 'success'; var c = document.getElementById('toastContainer'), o = document.createElement('div'); o.className = 'toast'; var i = { success: 'fa-circle-check text-emerald-400', error: 'fa-circle-exclamation text-red-400', info: 'fa-circle-info text-blue-400' }; o.innerHTML = '<i class="fa-solid ' + (i[t] || i.success) + '"></i> ' + m; c.appendChild(o); setTimeout(function() { o.style.opacity = '0'; o.style.transition = 'opacity 0.2s ease'; setTimeout(function() { o.remove(); }, 250); }, 2400); }
+      window.copyText = function(t) { if (!navigator.clipboard) { var a = document.createElement('textarea'); a.value = t; a.style.position = 'fixed'; a.style.opacity = '0'; document.body.appendChild(a); a.select(); document.execCommand('copy'); document.body.removeChild(a); showToast('Copied to clipboard', 'success'); return; } navigator.clipboard.writeText(t).then(function() { showToast('Copied successfully', 'success'); }).catch(function() { showToast('Unable to copy', 'error'); }); };
+      window.shareProfile = function() { var d = { title: 'Bogale Siyum - Director Hawassa District', text: 'Director Hawassa District · Cooperative Bank of Oromia', url: currentPageUrl }; if (navigator.share && navigator.canShare && navigator.canShare(d)) { navigator.share(d).then(function() { showToast('Shared successfully', 'success'); }).catch(function(e) { if (e.name !== 'AbortError') window.copyText(currentPageUrl); }); } else { window.copyText(currentPageUrl); } };
+      window.downloadVCard = function() { var v = 'BEGIN:VCARD\r\nVERSION:3.0\r\nFN:Bogale Siyum\r\nN:Siyum;Bogale;;;\r\nORG:Cooperative Bank of Oromia\r\nTITLE:Director Hawassa District\r\nTEL;TYPE=CELL,VOICE:+251913329703\r\nEMAIL;TYPE=INTERNET:Bogsiyum@gmail.com\r\nURL:' + currentPageUrl + '\r\nADR;TYPE=WORK:;;Hawassa District Headquarters;Hawassa;;;Ethiopia\r\nEND:VCARD'; var b = new Blob(['\ufeff' + v], { type: 'text/vcard;charset=utf-8;' }); var u = URL.createObjectURL(b); var l = document.createElement('a'); l.href = u; l.download = 'Bogale_Siyum.vcf'; document.body.appendChild(l); l.click(); document.body.removeChild(l); URL.revokeObjectURL(u); showToast('Contact Saved Successfully', 'success'); };
       if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function() { setTimeout(generateRealQRCode, 300); });
       else setTimeout(generateRealQRCode, 100);
     })();
